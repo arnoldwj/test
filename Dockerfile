@@ -20,6 +20,6 @@ RUN pip install --upgrade pip && \
 #RUN chown root:root /usr/bin/chromedriver
 #RUN chmod +x /usr/bin/chromedriver
 
-ENV PATH="/usr/bin/chromedriver:$PATH"
+#ENV PATH="/usr/bin/chromedriver:$PATH"
 
 CMD ["python", "./main.py"]
