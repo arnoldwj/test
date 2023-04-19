@@ -4,7 +4,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome('/usr/bin/chromedriver')
 driver.get("http://www.montypythononlinestore.com/")
 
 # accesses search box, find el by ID = search-field
