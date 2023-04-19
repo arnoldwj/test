@@ -10,7 +10,7 @@ options.headless = True
 options.add_argument('--no-sandbox')
 options.add_argument('--disable-gpu')
 
-driver = webdriver.Chrome()
+driver = webdriver.Chrome(options=options)
 print(driver.name)
 driver.get("http://www.montypythononlinestore.com/")
 
