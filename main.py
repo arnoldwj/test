@@ -4,32 +4,54 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-# additional settings for chrome options.
-options = webdriver.ChromeOptions()
-options.headless = True
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-gpu')
 
-driver = webdriver.Chrome(options=options)
-print(driver.name)
-driver.get("http://www.montypythononlinestore.com/")
+def main():
+    scrape()
 
-# accesses search box, find el by ID = search-field
-search_box = driver.find_element(By.ID, "search-field")
-# types in t-shirt
-search_box.send_keys("book")
-# presses enter
-search_box.send_keys(Keys.ENTER)
 
-# waits for result to show
-wait = WebDriverWait(driver, 10)
-element = wait.until(expected_conditions
-                     .presence_of_element_located((By.TAG_NAME, "h2")))
+def set_options():
+    # additional settings for chrome options.
+    options = webdriver.ChromeOptions()
+    options.headless = True
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-gpu')
+    return options
 
-element_text = element.text
-print(element_text)
 
-all_products = driver.find_elements(By.CLASS_NAME, 'product')
-print(f'There are {len(all_products)} shown')
+def configure_driver():
+    return webdriver.Chrome(options=set_options())
 
-driver.quit()
+
+def scrape():
+    driver = configure_driver()
+    driver.get("http://www.montypythononlinestore.com/")
+
+    # accesses search box, find el by ID = search-field
+    search_box = driver.find_element(By.ID, "search-field")
+    # types in t-shirt
+    search_box.send_keys("book")
+    # presses enter
+    search_box.send_keys(Keys.ENTER)
+
+    # waits for result to show
+    wait = WebDriverWait(driver, 10)
+    wait.until(expected_conditions.presence_of_element_located((By.TAG_NAME, "h2")))
+    element = wait.until(expected_conditions
+                         .presence_of_element_located((By.TAG_NAME, "h2")))
+
+    element_text = element.text
+    print(element_text)
+
+    result = driver.find_elements(By.CLASS_NAME, 'product')
+    # print(f'There are {len(result)} shown')
+    print(f'Total number of books:{len(result)}')
+
+    driver.quit()
+
+    print(f'{len(result)}')
+
+    return len(result)
+
+
+if __name__ == "__main__":
+    main()
