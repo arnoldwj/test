@@ -24,4 +24,4 @@ COPY . .
 
 #run this command for docker with flask
 #CMD ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
-CMD ["python3", "flask run"]
+CMD ["app.py"]
