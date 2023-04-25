@@ -8,6 +8,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 def main():
     scrape()
 
+
 def set_options():
     # additional settings for chrome options.
     options = webdriver.ChromeOptions()
@@ -42,7 +43,6 @@ def scrape():
     print(element_text)
 
     result = driver.find_elements(By.CLASS_NAME, 'product')
-    # print(f'There are {len(result)} shown')
     print(f'Total number of books:{len(result)}')
 
     driver.quit()
